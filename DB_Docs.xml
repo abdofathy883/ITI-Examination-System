@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Database name="Examination-System">
+    <functions>
+        <function>
+            <fnName>GetStudentGrade</fnName>
+            <description>Takes student's score and calculate his/her grade</description>
+            <parameter>Student's score</parameter>
+            <output>Character represents student's grade</output>
+        </function>
+        <function>
+            <fnName>GetScoreStatistics</fnName>
+            <description>Displays the average scores, lowest score and highest score</description>
+            <parameter>N/A</parameter>
+            <output>Average scores, lowest score and highest score</output>
+        </function>
+    </functions>
+    <triggers>
+        <trigger>
+            <tName>trg_PreventDeleteStudentAnswer</tName>
+            <table>Answer</table>
+            <event>Instead of delete</event>
+            <description>Prevent deletion of studen's answers</description>
+            <action>Instead of deleting stusent's answers, and printing error message to inform the user with his cabibilies</action>
+        </trigger>
+        <triggers>
+        <trigger>
+            <tName>trg_UpdateExamTotalDegree</tName>
+            <table>Exam</table>
+            <event>After Modification (delete or update)</event>
+            <description>calculates total degree for each exam based on questions choose by instructor</description>
+            <action>calculates exam's total degree</action>
+        </trigger>
+    </triggers>
+    <views>
+        <view>
+            <vName>V_Branch_Data</vName>
+            <description>Retrive and display institute data</description>
+            <tables>Branch, Departement, Track</tables>
+        </view>
+        <view>
+            <vName>V_Manager_Data</vName>
+            <description>Retrive and display manager's data with branch and track</description>
+            <tables>Manager, Branch, Track</tables>
+        </view>
+        <view>
+            <vName>V_Instructor_Data</vName>
+            <description>Retrive and display all data about instructor and his work environment</description>
+            <tables>Instructor, Course, Track, Departement, Branch</tables>
+        </view>
+        <view>
+            <vName>V_Student_Data</vName>
+            <description>Retrive and display all student's data including institution and courses</description>
+            <tables>Student, Course, Track, Intake, Departement, Branch</tables>
+        </view>
+        <view>
+            <vName>V_Exam_Data</vName>
+            <description>Retrive and display all exams, related course, instructor and ansers of this exam</description>
+            <tables>Exam, Course, Instructor, Answer</tables>
+        </view>
+        <view>
+            <vName>V_Course_Instructor</vName>
+            <description>Retrive and display all courses and the instructors</description>
+            <tables>Course, Instructor</tables>
+        </view>
+    </views>
+    <sps>
+        <sp>
+            
+        </sp>
+    </sps>
+
+
+
+
+</Database>
