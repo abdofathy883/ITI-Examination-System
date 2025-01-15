@@ -2,14 +2,14 @@
 Overview
 The Examination System Database project manages student records, scores, and grades. It includes SQL scripts for creating tables, stored procedures, triggers, and functions designed to automate and streamline student data management. This repository also includes XML documentation explaining each database object's structure and functionality.
 
-#Features
+# Features
 Tables: Store student information, scores, and related data.
 Stored Procedures: Calculate and manage student grades.
 Triggers: Automatically update or validate data when necessary (e.g., updating grades after score changes).
 Functions: Provide useful functions like grade calculation and score statistics.
 XML Documentation: Comprehensive documentation for all database objects, including stored procedures, triggers, and functions.
 
-#Structure
+# Structure
 The project contains the following key components:
 
 SQL Scripts: SQL files for creating tables, stored procedures, triggers, and functions.
