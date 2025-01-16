@@ -126,3 +126,16 @@ from
 where
     C.ID = ICT.Crs_ID and I.ID = ICT.Ins_ID;
 Go
+
+create view ShowExam
+as
+select E.ID, QP.Content, C.Choice_1, c.Choice_2, c.Choice_3, c.Choice_4
+from Exam E join Exam_Question EQ
+on E.ID = EQ.Exam_ID
+join Question_Pool QP
+on QP.ID = EQ.Q_ID
+join Choice C
+on C.ID = QP.Choice_ID
+Go
+
+select * from ShowExam

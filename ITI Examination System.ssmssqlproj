@@ -18,10 +18,31 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
+        <ConnectionNode Name="DESKTOP-NAPUIAL:Student">
+          <Created>2025-01-16T09:22:48.4987735+02:00</Created>
+          <Type>SQL</Type>
+          <Server>DESKTOP-NAPUIAL</Server>
+          <UserName>Student</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <TrustServerCertificate>True</TrustServerCertificate>
+          <HostNameInServerCertificate />
+          <EncryptionOption>True</EncryptionOption>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName />
+        </ConnectionNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
+        <FileNode Name="DDL on SPs.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-NAPUIAL:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-NAPUIAL</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>DDL on SPs.sql</FullPath>
+        </FileNode>
         <FileNode Name="DDL.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-NAPUIAL:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-NAPUIAL</AssociatedConnSrvName>

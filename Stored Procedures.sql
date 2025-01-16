@@ -1,4 +1,6 @@
-create proc CreateExam
+ exec CreateExam @Ex_ID = 8, @Title= 'Title 1', @Type = 'Multiple Choice', @Total_Time = 2, @total_Dregree = 10, @crs_id = 300
+go
+create or alter proc CreateExam
     @Ex_ID int,
 	@Title nvarchar(50),
 	@Type nvarchar(50),
@@ -16,21 +18,21 @@ begin try
 			insert into exam (ID, Title, Type, Total_Time , Total_Degree ,Crs_ID)
 			values (@EX_ID, @Title, @Type, @Total_time ,@Total_Dregree, @crs_id);
 
-			if(@Type = 't/f')
+			if(@Type = 'True/False')
 				begin
-					insert into Exam_Question (Exam_ID,Q_ID)
+					insert into Exam_Question (Exam_ID, Q_ID)
 					select top (10) @Ex_ID, q.ID
 					from Question_Pool q
-					where q.type = 't/f'
+					where q.type = 'True/False'
 					order by newid();
 				end
-			else if(@Type = 'mcq')
+			else if(@Type = 'Multiple Choice')
 				begin
 			
 				insert into Exam_Question (Exam_ID,Q_ID)
-				select top (10) @Ex_id, q.ID
+				select top (10) @Ex_ID, q.ID
 				from Question_Pool q
-				where q.Type = 'mcq'
+				where q.Type = 'Multiple Choice'
 				order by newid();
 			end
 		end
@@ -40,12 +42,29 @@ begin catch
 end catch
 Go
 ----------------------
-create procedure CalculateStudentScore
+select * from ShowExam
+exec AnswerExam @Ans_ID = 1, @Answer = 'a', @Ex_ID = 8
+create or alter procedure AnswerExam @Ans_ID int, @Answer nvarchar(100), @Ex_ID int
+as
+begin
+	insert into Answer(ID, Exam_ID, Content)
+	values(@Ans_ID, @Ex_ID, @Answer)
+end
+go
+exec CalculateStudentScore @StudentID = 200, @ExamID = 1
+go
+exec CalculateStudentScore @StudentID = 200, @ExamID = 8
+
+
+---------------------
+exec CalculateStudentScore1 @StudentID = 200, @ExamID = 8
+
+create procedure CalculateStudentScore1
     @StudentID int,
     @ExamID int
 as
 begin
-    declare @CorrectAnswer nvarchar(100);
+    declare @CorrectAnswer nvarchar(100)
     declare @StudentAnswer nvarchar(100);
     declare @Score int = 0;
     declare @QuestionID int;
@@ -62,10 +81,11 @@ begin
     while @@fetch_status = 0
     begin
         select @StudentAnswer = A.Content
-        from Student_Exam_Answer SEA
-        join Answer A 
+        from Answer A
+        join Student_Exam_Answer SEA 
 		on SEA.Ans_ID = A.ID
-        where SEA.Std_ID = @StudentID and SEA.Exam_ID = @ExamID and SEA.Ans_ID = @QuestionID;
+		
+        where SEA.Std_ID = @StudentID and SEA.Exam_ID = @ExamID 
 
         if @StudentAnswer = @CorrectAnswer
         begin
@@ -86,3 +106,6 @@ begin
     print 'Final Score for Student ID ' + cast(@StudentID as nvarchar(10)) + ' is ' + cast(@Score as nvarchar(10));
 end;
 go
+
+
+
