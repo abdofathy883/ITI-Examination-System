@@ -65,11 +65,24 @@
     </views>
     <sps>
         <sp>
-            
+            <name>CreateExam</name>
+            <parameters>
+                <param>Exam ID</param>
+                <param>Title</param>
+                <param>Type</param>
+                <param>Total Time</param>
+                <param>Total Degree</param>
+                <param> Course ID</param>
+            </parameters>
+            <description>Stored Procedure allows instructorto create exam based on the previous parameter</description>
+        </sp>
+        <sp>
+            <name>CalculateStudentScore</name>
+            <parameters>
+                <param>Exam ID</param>
+                <param>Student ID</param>
+            </parameters>
+            <description>Stored Procedure takes student's answer from Answer table and validate it againstthe model answer in Question_Pool table</description>
         </sp>
     </sps>
-
-
-
-
 </Database>
