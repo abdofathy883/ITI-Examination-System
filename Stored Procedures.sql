@@ -16,7 +16,7 @@ begin try
 	else
 		begin
 			insert into exam (ID, Title, Type, Total_Time , Total_Degree ,Crs_ID)
-			values (@EX_ID, @Title, @Type, @Total_time ,@Total_Dregree, @crs_id);
+			values (@EX_ID, @Title, @Type, @Total_time ,@Total_Dregree, @crs_id)
 
 			if(@Type = 'True/False')
 				begin
@@ -24,7 +24,7 @@ begin try
 					select top (10) @Ex_ID, q.ID
 					from Question_Pool q
 					where q.type = 'True/False'
-					order by newid();
+					order by newid()
 				end
 			else if(@Type = 'Multiple Choice')
 				begin
@@ -33,7 +33,7 @@ begin try
 				select top (10) @Ex_ID, q.ID
 				from Question_Pool q
 				where q.Type = 'Multiple Choice'
-				order by newid();
+				order by newid()
 			end
 		end
 end try
@@ -65,19 +65,19 @@ create procedure CalculateStudentScore1
 as
 begin
     declare @CorrectAnswer nvarchar(100)
-    declare @StudentAnswer nvarchar(100);
-    declare @Score int = 0;
-    declare @QuestionID int;
+    declare @StudentAnswer nvarchar(100)
+    declare @Score int = 0
+    declare @QuestionID int
     
     declare answer_cursor cursor for
     select Q.ID, Q.Model_Answer
     from Question_Pool Q
     join Exam_Question EQ 
 	on Q.ID = EQ.Q_ID
-    where EQ.Exam_ID = @ExamID;
+    where EQ.Exam_ID = @ExamID
 
-    open answer_cursor;
-    fetch next from answer_cursor into @QuestionID, @CorrectAnswer;
+    open answer_cursor
+    fetch next from answer_cursor into @QuestionID, @CorrectAnswer
     while @@fetch_status = 0
     begin
         select @StudentAnswer = A.Content
@@ -91,20 +91,20 @@ begin
         begin
             select @Score = @Score + Q.Degree
             from Question_Pool Q
-            where Q.ID = @QuestionID;
+            where Q.ID = @QuestionID
         end
-	fetch next from answer_cursor into @QuestionID, @CorrectAnswer;
-    end;
+	fetch next from answer_cursor into @QuestionID, @CorrectAnswer
+    end
 
-    close answer_cursor;
-    deallocate answer_cursor;
+    close answer_cursor
+    deallocate answer_cursor
 
     update Student_Exam_Answer
     set Score = @Score
-    where Std_ID = @StudentID and Exam_ID = @ExamID;
+    where Std_ID = @StudentID and Exam_ID = @ExamID
 
-    print 'Final Score for Student ID ' + cast(@StudentID as nvarchar(10)) + ' is ' + cast(@Score as nvarchar(10));
-end;
+    print 'Final Score for Student ID ' + cast(@StudentID as nvarchar(10)) + ' is ' + cast(@Score as nvarchar(10))
+end
 go
 
 
