@@ -1,0 +1,42 @@
+In Examination System Database we have 3 users, each one have his own authoroties.
+
+First user => Manager
+Username: Manager
+Password: M12345
+
+Cabibilities:
+Full Controll on the following tables:
+- Branch
+- Departement
+- Track 
+- Intake
+- Instructor
+- Manager
+- Student
+- Course
+-----------------------------------------------------------------
+Second User => Instructor
+Username: Instructor
+Password: I12345
+
+Cabibilities:
+Full Controll on the following tables:
+- Choice
+- Exam
+- Exam_Question
+- Instructor_Course_Exam
+- Instructor_Student_Exam
+- Question_Pool
+- Student
+- Student_Course
+- Student_Exam_Answer
+--------------------------------------------------------------------
+Third User => Student
+Username: Student
+Password: S12345
+
+Cabibilities:
+Insert, Update and select on the following tables:
+- Answer
+- Student
+- Student_Exam_Answer
