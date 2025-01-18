@@ -14,14 +14,12 @@ go
 create or alter procedure update_student
     @ID int ,
 	@FullName nvarchar(20) ,
-	@Email nvarchar(30),
-	@Track_ID int
+	@Email nvarchar(30)
 as
 begin
     update Student
     set FullName = @FullName,
-        Email = @Email,
-        Track_ID = @Track_ID
+        Email = @Email
     where ID = @ID
 end
 go

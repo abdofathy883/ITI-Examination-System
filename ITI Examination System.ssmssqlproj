@@ -18,6 +18,21 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
         </ConnectionNode>
+        <ConnectionNode Name="DESKTOP-NAPUIAL:Instructor">
+          <Created>2025-01-18T12:35:52.4743072+02:00</Created>
+          <Type>SQL</Type>
+          <Server>DESKTOP-NAPUIAL</Server>
+          <UserName>Instructor</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <TrustServerCertificate>True</TrustServerCertificate>
+          <HostNameInServerCertificate />
+          <EncryptionOption>True</EncryptionOption>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName />
+        </ConnectionNode>
         <ConnectionNode Name="DESKTOP-NAPUIAL:Student">
           <Created>2025-01-16T09:22:48.4987735+02:00</Created>
           <Type>SQL</Type>
@@ -60,6 +75,12 @@
           <AssociatedConnSrvName>DESKTOP-NAPUIAL</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Run File.sql</FullPath>
+        </FileNode>
+        <FileNode Name="SQLQuery1.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-NAPUIAL:False:Instructor</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-NAPUIAL</AssociatedConnSrvName>
+          <AssociatedConnUserName>Instructor</AssociatedConnUserName>
+          <FullPath>SQLQuery1.sql</FullPath>
         </FileNode>
         <FileNode Name="Stored Procedures.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-NAPUIAL:True</AssociatedConnectionMoniker>

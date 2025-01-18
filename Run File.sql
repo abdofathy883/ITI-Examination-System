@@ -1,38 +1,66 @@
 -----------------------Views-----------------------
-
 select * from V_Branch_Data
+
 select * from V_Manager_Data
+
 select * from V_Instructor_Data
+
 select * from V_Student_Data
+
 select * from V_Exam_Data
+
 select * from V_Course_Instructor
+
 select * from ShowExam
 
 -----------------------Functions-----------------------
 select * from GetScoreStatistics()
 
-select * from GetStudentGrade(1)
+select dbo.GetStudentGrade(11) 
 
-select * from [dbo].[GetStudentGrade]
+select S.ID as StudentID,S.FullName as StudentName, SEA.Score as StudentScore ,
+    dbo.GetStudentGrade(SEA.Score) as StudentGrade
+from Student_Exam_Answer SEA ,   Student S
+where SEA.Std_ID = S.ID
+Go
 
 -----------------------Stored Procedures-----------------------
 -----------------------Core SPs-----------------------
-exec CreateExam @Ex_ID = 20, @Title= 'Exam 3', @Type = 'True/False', 
-@Total_Time = 2, @total_Dregree = 40, @crs_id = 301, @Ins_ID = 110, @Std_ID = 205,
+declare @Student_List StudentsID
+
+insert into @Student_List (Student_ID)
+values (206), (207), (208), (209), (210)
+
+exec CreateExam @Ex_ID = 50, @Title= 'Exam 500', @Type = 'True/False', 
+@Total_Time = 2, @crs_id = 304, @Ins_ID = 112, @Std_IDs = @Student_List,
 @Ex_Date = '2025-01-18', @Ex_Start_Time = '11:45:00'
 go
 
-exec AnswerExam @Ans_ID = 21, @Answers = 'False', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 22, @Answers = 'True', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 23, @Answers = 'True', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 24, @Answers = 'False', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 25, @Answers = 'True', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 26, @Answers = 'False', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 27, @Answers = 'True', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 28, @Answers = 'True', @Ex_ID = 20
-exec AnswerExam @Ans_ID = 29, @Answers = 'False', @Ex_ID = 20
+select * from ShowExam
+exec AnswerExam @Ans_ID = 23, @Answers = 'Flase', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 24, @Answers = 'True', @Ex_ID =40
+exec AnswerExam @Ans_ID = 29, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 31, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 33, @Answers = 'False', @Ex_ID =40
+exec AnswerExam @Ans_ID = 34, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 37, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 38, @Answers = 'False', @Ex_ID =40
+exec AnswerExam @Ans_ID = 39, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 40, @Answers = 'True', @Ex_ID = 40
 
-exec CalculateStudentScore @StudentID = 205, @ExamID = 20
+exec AnswerExam @Ans_ID = 23, @Answers = 'Flase', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 24, @Answers = 'True', @Ex_ID =40
+exec AnswerExam @Ans_ID = 29, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 31, @Answers = 'True', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 33, @Answers = 'False', @Ex_ID =40
+exec AnswerExam @Ans_ID = 34, @Answers = 'False', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 37, @Answers = 'False', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 38, @Answers = 'True', @Ex_ID =40
+exec AnswerExam @Ans_ID = 39, @Answers = 'False', @Ex_ID = 40
+exec AnswerExam @Ans_ID = 40, @Answers = 'False', @Ex_ID = 40
+
+
+exec CalculateStudentScore @StudentID = 207, @ExamID = 40
 go
 ----------------
 
@@ -40,7 +68,7 @@ exec insert_student @FullName = 'Student test', @Email = 'student@gmail.com', @T
 go
 
 exec update_student @ID = ,@FullName = 'Student test updated', 
-	@Email = 'studentUpdated@gmail.com', @Track_Id = 1
+	@Email = 'studentUpdated@gmail.com'
 go
 
 exec delete_student @ID = 

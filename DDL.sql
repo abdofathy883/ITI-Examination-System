@@ -30,6 +30,10 @@ GO
 --------------------Create Data Types--------------------
 create type phone from char(11) not null
 create type email from varchar(50) not null 
+create type StudentsID as table 
+(
+	Student_ID int
+)
 Go
 
 --------------------Create Tables --------------------
@@ -192,7 +196,7 @@ create table Student_Exam_Answer
 	Exam_ID int ,
 	Ans_ID int ,
 	Score tinyint ,
-	constraint Pk_Std_Exam_Ans primary key (Exam_ID, Ans_ID, Std_ID)
+	constraint Pk_Std_Exam_Ans primary key (Exam_ID, Std_ID)
 )
 
 create table Answer
