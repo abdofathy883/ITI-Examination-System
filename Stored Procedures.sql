@@ -1,7 +1,3 @@
-exec CreateExam @Ex_ID = 10, @Title= 'Exam 2', @Type = 'True/False', 
-@Total_Time = 2, @total_Dregree = 10, @crs_id = 300, @Ins_ID = 110, @Std_ID = 207,
-@Ex_Date = '2025-01-10', @Ex_Start_Time = '12:00:00'
-go
 create or alter proc CreateExam
     @Ex_ID int,
 	@Title nvarchar(50),
@@ -63,11 +59,6 @@ begin catch
 end catch
 Go
 ----------------------
-select * from ShowExam
-exec AnswerExam @Ans_ID = 1, @Answer = 'a', @Ex_ID = 8
-exec AnswerExam @Ans_ID = 20, @Answers = 'False,True,True,True,False,True,False,False,True,False', @Ex_ID = 10
-
-go
 
 create or alter procedure AnswerExam 
 	@Ans_ID int, @Answers nvarchar(100), @Ex_ID int
@@ -93,57 +84,7 @@ begin
 	end catch
 end
 go
-
 ---------------------
-exec CalculateStudentScore1 @StudentID = 207, @ExamID = 10
-go
---create procedure CalculateStudentScore1
---    @StudentID int,
---    @ExamID int
---as
---begin
---    declare @CorrectAnswer nvarchar(100)
---    declare @StudentAnswer nvarchar(100)
---    declare @Score int = 0
---    declare @QuestionID int
-    
---    declare answer_cursor cursor for
---    select Q.ID, Q.Model_Answer
---    from Question_Pool Q
---    join Exam_Question EQ 
---	on Q.ID = EQ.Q_ID
---    where EQ.Exam_ID = @ExamID
-
---    open answer_cursor
---    fetch next from answer_cursor into @QuestionID, @CorrectAnswer
---    while @@fetch_status = 0
---    begin
---        select @StudentAnswer = A.Content
---        from Answer A
---        join Student_Exam_Answer SEA 
---		on SEA.Ans_ID = A.ID
-		
---        where SEA.Std_ID = @StudentID and SEA.Exam_ID = @ExamID 
-
---        if @StudentAnswer = @CorrectAnswer
---        begin
---            select @Score = @Score + Q.Degree
---            from Question_Pool Q
---            where Q.ID = @QuestionID
---        end
---	fetch next from answer_cursor into @QuestionID, @CorrectAnswer
---    end
-
---    close answer_cursor
---    deallocate answer_cursor
-
---    update Student_Exam_Answer
---    set Score = @Score
---    where Std_ID = @StudentID and Exam_ID = @ExamID
-
---    print 'Final Score for Student ID ' + cast(@StudentID as nvarchar(10)) + ' is ' + cast(@Score as nvarchar(10))
---end
---go
 
 create or alter procedure CalculateStudentScore
     @StudentID int,
@@ -154,8 +95,10 @@ begin
     declare @StudentAnswer nvarchar(100)
     declare @Score int = 0
     declare @QuestionID int
-    
+
+
     declare answer_cursor cursor for
+
     select Q.ID, Q.Model_Answer
     from Question_Pool Q
     join Exam_Question EQ 
@@ -168,10 +111,7 @@ begin
     begin
         select @StudentAnswer = A.Content
         from Answer A
-        join Student_Exam_Answer SEA 
-		on SEA.Ans_ID = A.ID
-		
-        where SEA.Std_ID = @StudentID and SEA.Exam_ID = @ExamID 
+        where @ExamID=A.Exam_ID and @QuestionID=A.ID
 
         if @StudentAnswer = @CorrectAnswer
         begin
@@ -186,8 +126,7 @@ begin
     deallocate answer_cursor
 
     update Student_Exam_Answer
-    set Score = @Score
-    where Std_ID = @StudentID and Exam_ID = @ExamID
+    set Score = @Score ,Exam_ID =@ExamID ,Std_ID=@StudentID
 
     print 'Final Score for Student ID ' + cast(@StudentID as nvarchar(10)) + ' is ' + cast(@Score as nvarchar(10))
 end

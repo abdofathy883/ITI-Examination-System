@@ -41,7 +41,6 @@ create table Student
 	Phone phone,
 	Track_ID int,
 	constraint PK_Student primary key (ID),
-	--constraint Fk_Track_ID foreign key(Track_ID) references Track(ID),
 	constraint CHK_EmailFormat check (Email like '_%@_%._%'),
 	constraint CHK_Phone_No_Digits check (Phone like '[0][0125][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 )--on SecondaryFG
@@ -60,9 +59,7 @@ create table Student_Course
 (
 	Std_ID int ,
 	Crs_ID int ,
-	constraint PK_Student_Course primary key (Std_ID,Crs_ID),
-	--constraint Fk_Std_ID foreign key (Std_ID) references  Student(ID),
-	--constraint Fk_Crs_ID foreign key (Crs_ID) references  Course(ID)
+	constraint PK_Student_Course primary key (Std_ID,Crs_ID)
 ) --on SecondaryFG
 
 create table Track
@@ -71,9 +68,7 @@ create table Track
 	Name nvarchar(20) not null,
 	Dept_ID int ,
 	Intake_ID int,
-	constraint PK_Track primary key (ID),
-	--constraint Fk_Dept_ID foreign key(Dept_ID) references Department(ID),
-	--constraint Fk_Intake_ID foreign key (Intake_ID) references Intake(ID)
+	constraint PK_Track primary key (ID)
 
 ) --on SecondaryFG
 
@@ -84,10 +79,7 @@ create table Instructor_Student_Exam
 	Ins_ID int ,
 	Std_ID int ,
 	Exam_ID int ,
-	constraint PK_Instructor_Student_Exam primary key (Ins_ID , Std_ID , Exam_ID),
-	--constraint Fk_Ins_ID foreign key(Ins_ID) references Instructor(ID),
-	--constraint Fk_Std_ID foreign key(Std_ID) references Student(ID),
-	--constraint Fk_Exam_ID foreign key(Exam_ID) references Exam(ID)
+	constraint PK_Instructor_Student_Exam primary key (Ins_ID , Std_ID , Exam_ID)
 	
 ) on SecondaryFG
 
@@ -100,7 +92,6 @@ create table Manager
 	Salary money ,
 	Dept_ID int ,
 	constraint PK_Manager primary key (ID),
-	--constraint Fk_Deptm_ID foreign key(Dept_ID) references Department(ID),
 	constraint CHK_Email_Format check (Email like '_%@_%._%'),
 	constraint CHK_Phone_Num_Digits check (Phone like '[0][0125][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 )
@@ -114,7 +105,6 @@ create table Instructor
 	Email nvarchar(30),
 	Salary decimal,
 	constraint PK_Instructor primary key (ID),
-	--constraint FK_Ins_Mgr foreign key (Mgr_ID) references Manager (ID),
 	constraint CHK_Email_ check (Email like '_%@_%._%'),
 	constraint CHK_Phone_Digits check (Phone like '[0][0125][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 )
@@ -124,10 +114,7 @@ create table Instructor_Course_Track
 	Ins_ID int ,
 	Crs_ID int ,
 	Track_ID int ,
-	constraint PK_Instructor_Course_Track primary key (Ins_ID , Crs_ID , Track_ID),
-	--constraint Fk_Instractor_ID foreign key(Ins_ID) references Instructor(ID),
-	--constraint Fk_Course_ID foreign key(Crs_ID) references Course(ID),
-	--constraint Fk_Track_ICT_ID foreign key(Track_ID) references Track(ID)
+	constraint PK_Instructor_Course_Track primary key (Ins_ID , Crs_ID , Track_ID)
 )
 
 create table Instructor_Course_Exam
@@ -136,10 +123,7 @@ create table Instructor_Course_Exam
 	Crs_ID int ,
 	Exam_ID int ,
 	[Year] date check ([Year] > '1970-01-01'),
-	constraint PK_Instructor_Course_Exam primary key (Ins_ID , Crs_ID , Exam_ID),
-	--constraint Fk_Ins_ICE_ID foreign key(Ins_ID) references Instructor(ID),
-	--constraint Fk_Crs_ICE_ID foreign key(Crs_ID) references Course(ID),
-	--constraint Fk_Exam_ICE_ID foreign key(Exam_ID) references Exam(ID)
+	constraint PK_Instructor_Course_Exam primary key (Ins_ID , Crs_ID , Exam_ID)
 )
 
 create table Branch
@@ -155,8 +139,7 @@ create table Department
 	ID int ,
 	[Name] nvarchar(20),
 	Branch_ID int ,
-	constraint PK_Department primary key (ID),
-	--constraint FK_Branch_ID foreign key (Branch_ID) references Branch(ID)
+	constraint PK_Department primary key (ID)
 )
 
 create table Intake
@@ -171,9 +154,7 @@ create table Track_Intake
 (	
 	Track_ID int ,
 	Intake_ID int ,
-	constraint Pk_Track_Intake primary key (Track_ID, Intake_ID),
-	--constraint FK_Intake_TI_ID foreign key (Intake_ID) references Intake(ID),
-	--constraint FK_Track_TI_ID foreign key(Track_ID) references Track(ID)
+	constraint Pk_Track_Intake primary key (Track_ID, Intake_ID)
 )
 
 create table Exam
@@ -184,8 +165,7 @@ create table Exam
 	Total_Time tinyint,
 	Total_Degree tinyint  ,
 	Crs_ID int ,
-	constraint PK_Exam primary key (ID),
-	--constraint FK_Crs_E_ID foreign key(Crs_ID) references Course(ID)
+	constraint PK_Exam primary key (ID)
 )
 
 create table Question_Pool
@@ -196,17 +176,14 @@ create table Question_Pool
 	Model_Answer nvarchar(50) ,
 	Degree tinyint,
 	Choice_ID int not null,
-	constraint PK_Question_Pool primary key (ID),
-	--constraint FK_Choice_ID foreign key(Choice_ID) references Choice(ID)
+	constraint PK_Question_Pool primary key (ID)
 )
 
 create table Exam_Question
 (
 	Exam_ID int ,
 	Q_ID int ,
-	constraint Pk_Exam_Q primary key (Exam_ID, Q_ID),
-	--constraint FK_Exam_ID foreign key(Exam_ID) references Exam(ID),
-	--constraint FK_Q_ID foreign key(Q_ID) references Question_Pool(ID)
+	constraint Pk_Exam_Q primary key (Exam_ID, Q_ID)
 )
 
 create table Student_Exam_Answer
@@ -215,10 +192,7 @@ create table Student_Exam_Answer
 	Exam_ID int ,
 	Ans_ID int ,
 	Score tinyint ,
-	constraint Pk_Std_Exam_Ans primary key (Exam_ID, Ans_ID, Std_ID),
-	--constraint FK_Std_SEA_ID foreign key(Std_ID) references Student(ID),
-	--constraint FK_Exam_SEA_ID foreign key(Exam_ID) references Exam(ID),
-	--constraint FK_Ans_SEA_ID foreign key(Ans_ID) references Answer(ID)
+	constraint Pk_Std_Exam_Ans primary key (Exam_ID, Ans_ID, Std_ID)
 )
 
 create table Answer
@@ -226,9 +200,9 @@ create table Answer
 	ID int ,
 	Exam_ID int,
 	Content nvarchar(max),
-	constraint PK_Answer primary key (ID),
-	--constraint FK_Exam_ANS_ID foreign key(Exam_ID) references Exam(ID)
+	constraint PK_Answer primary key (ID)
 )
+
 
 create table Choice
 (

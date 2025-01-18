@@ -55,6 +55,12 @@
           <AssociatedConnUserName />
           <FullPath>Insert.sql</FullPath>
         </FileNode>
+        <FileNode Name="Run File.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-NAPUIAL:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-NAPUIAL</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Run File.sql</FullPath>
+        </FileNode>
         <FileNode Name="Stored Procedures.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-NAPUIAL:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-NAPUIAL</AssociatedConnSrvName>

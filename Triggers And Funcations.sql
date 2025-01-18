@@ -32,7 +32,7 @@ Go
 
  
 ----------------functions----------------
-create function GetStudentGrade (@Score int)
+create or alter function GetStudentGrade (@Score int)
 returns nvarchar(2)
 as 
 begin
@@ -50,7 +50,7 @@ begin
         set @Grade = 'F';
 
     return @Grade;
-END;
+end
 Go
 
 select S.ID as StudentID,S.FullName as StudentName, SEA.Score as StudentScore ,

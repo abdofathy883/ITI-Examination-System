@@ -137,5 +137,3 @@ on QP.ID = EQ.Q_ID
 join Choice C
 on C.ID = QP.Choice_ID
 Go
-
-select * from ShowExam

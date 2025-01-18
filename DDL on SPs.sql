@@ -146,48 +146,6 @@ begin
 end
 go
 
---------------------------Instructor_Student_Exam-------------------------------
-create procedure insert_Instructor_Student_Exam
-    @Exam_Date date,
-	@Start_Time time,
-	@Ins_ID int ,
-	@Std_ID int ,
-	@Exam_ID int 
-as
-begin
-    insert into Instructor_Student_Exam(Exam_Date , Start_Time ,Ins_ID, Std_ID ,Exam_ID )
-    values (@Exam_Date , @Start_Time ,@Ins_ID, @Std_ID ,@Exam_ID )
-end
-go
-
-
-create procedure update_Instructor_Student_Exam
-    @Exam_Date date,
-	@Start_Time time,
-	@Ins_ID int ,
-	@Std_ID int ,
-	@Exam_ID int 
-as
-begin
-    update Instructor_Student_Exam
-    set Exam_Date = @Exam_Date ,
-	    Start_Time = @Start_Time ,
-		ins_id = @Ins_ID ,
-		std_id = @Std_ID  ,
-		exam_id = @Exam_ID  
-    where Ins_ID = @Ins_ID and Std_id = @Std_ID  and Exam_id = @Exam_ID  
-end
-go
-
-
-create procedure delete_Instructor_Student_Exam @Ins_ID int , @Std_ID int ,  @Exam_ID int
-as
-begin
-    delete from Instructor_Student_Exam 
-    where Ins_ID = @Ins_ID and Std_id = @Std_ID  and Exam_id = @Exam_ID  
-end
-go
-
 --------------------------Manager-------------------------------
 create or alter procedure insert_Manager
 	@FullName nvarchar(20) ,
@@ -309,50 +267,7 @@ begin
 end
 go
 
---------------------------Instructor_Course_Exam-------------------------------
-create or alter procedure insert_Instructor_Course_Exam
-    @Ins_ID int ,
-	@Crs_ID int ,
-	@Exam_ID int ,
-	@Year date
-as
-begin
-    insert into Instructor_Course_Exam(Ins_ID , Crs_ID, Exam_ID, Year )
-    values (@Ins_ID , @Crs_ID, @Exam_ID ,@Year )
-end
-go
-
-
-create or alter procedure update_Instructor_Course_Exam
-    @Ins_ID int ,
-	@Crs_ID int ,
-	@Exam_ID int ,
-	@Year date
-as
-begin
-    update Instructor_Course_Exam
-    set Ins_ID = @Ins_ID ,
-		Crs_id = @Crs_ID ,
-		Exam_ID = @Exam_ID ,
-		Year = @Year
-    where Ins_ID = @Ins_ID and Crs_id = @Crs_ID and Exam_ID = @Exam_ID
-end
-go
-
-
-create or alter procedure delete_Instructor_Course_Exam 
-    @Ins_ID int ,
-	@Crs_ID int ,
-	@Exam_ID int 
-as
-begin
-    delete from Instructor_Course_Exam  
-     where Ins_ID = @Ins_ID and Crs_id = @Crs_ID and Exam_ID = @Exam_ID
-end
-go
-
 --------------------------Branch-------------------------------
-
 
 create or alter procedure insert_Branch
     @ID int , 
@@ -362,9 +277,9 @@ as
 begin
     insert into Branch(ID , Name , [Location] )
     values (@ID , @Name , @Location )
-end;
-
+end
 go
+
 create or alter procedure update_Branch
     @ID int , 
 	@Name nvarchar(20),
@@ -485,36 +400,6 @@ begin
 end
 Go
 
-------------------------
-create procedure insert_exam   @ID int, @Title nvarchar(30),@Type nvarchar(50), @Total_Time int, @Total_Degree int, @Crs_ID int
-as
-begin
-    insert into Exam (ID, Title, Type, Total_Time, Total_Degree, Crs_ID)
-    values (@ID, @Title, @Type, @Total_Time, @Total_Degree, @Crs_ID)
-end
-Go
-
-create procedure update_exam   @ID int, @Title nvarchar(30), @Type nvarchar(50), @Total_Time int, @Total_Degree int, @Crs_ID int
-as
-begin
-    update Exam
-    set Title = @Title,
-        Type = @Type,
-        Total_Time = @Total_Time,
-        Total_Degree = @Total_Degree,
-        Crs_ID = @Crs_ID
-    where ID = @ID
-end
-Go
-
-create procedure delete_exam @ID int
-as
-begin
-    delete from Exam
-    where ID = @ID
-end
-Go
-
 -----------------------------------------
 create procedure insert_question_pool  @ID int,@Type nvarchar(30),@Content nvarchar(100), @Model_Answer nvarchar(20),@Degree int, @Choice_ID int
 as
@@ -544,89 +429,7 @@ begin
     where ID = @ID
 end
 Go
---------------------------------------
-create procedure insert_exam_question  @Exam_ID int, @Q_ID int
-as
-begin
-    insert into Exam_Question (Exam_ID, Q_ID)
-    values (@Exam_ID, @Q_ID)
-end
-Go
 
-create procedure update_exam_question @Old_Exam_ID int, @Old_Q_ID int, @New_Exam_ID int, @New_Q_ID int
-as
-begin
-    update Exam_Question
-    set Exam_ID = @New_Exam_ID,
-        Q_ID = @New_Q_ID
-    where Exam_ID = @Old_Exam_ID and Q_ID = @Old_Q_ID
-end
-Go
-
-create procedure delete_exam_question  @Exam_ID int, @Q_ID int
-as
-begin
-    delete from Exam_Question
-    where Exam_ID = @Exam_ID and Q_ID = @Q_ID
-end
-Go
-
------------------------------------
-create procedure insert_student_exam_answer @Std_ID int,@Exam_ID int,@Ans_ID int, @Score int
-as
-begin
-    insert into Student_Exam_Answer (Std_ID, Exam_ID, Ans_ID, Score)
-    values (@Std_ID, @Exam_ID, @Ans_ID, @Score)
-end
-Go
-
-create procedure update_student_exam_answer @Old_Std_ID int,@Old_Exam_ID int,@Old_Ans_ID int,@New_Std_ID int,@New_Exam_ID int,@New_Ans_ID int, @New_Score int
-as
-begin
-    update Student_Exam_Answer
-    set Std_ID = @New_Std_ID,
-        Exam_ID = @New_Exam_ID,
-        Ans_ID = @New_Ans_ID,
-        Score = @New_Score
-    where Std_ID = @Old_Std_ID and Exam_ID = @Old_Exam_ID and Ans_ID = @Old_Ans_ID
-end
-Go
-
-create procedure delete_student_exam_answer  @Std_ID int, @Exam_ID int, @Ans_ID int
-as
-begin
-    delete from Student_Exam_Answer
-    where Std_ID = @Std_ID and Exam_ID = @Exam_ID and Ans_ID = @Ans_ID
-end
-Go
-
--------------------------------------------------------
-create procedure insert_answer  @ID int, @Exam_ID int, @Content nvarchar(20)
-as
-begin
-    insert into Answer (ID, Exam_ID, Content)
-    values (@ID, @Exam_ID, @Content)
-end
-Go
-
-create procedure update_answer  @Old_ID int,@Old_Exam_ID int, @New_ID int,@New_Exam_ID int, @New_Content nvarchar(20)
-as
-begin
-    update Answer
-    set ID = @New_ID,
-        Exam_ID = @New_Exam_ID,
-        Content = @New_Content
-    where ID = @Old_ID and Exam_ID = @Old_Exam_ID
-end
-Go
-
-create procedure delete_answer  @ID int, @Exam_ID int
-as
-begin
-    delete from Answer
-    where ID = @ID and Exam_ID = @Exam_ID
-end
-Go
 -------------------------------------------------------
 create procedure insert_choice  @ID int, @Choice_1 nvarchar(20), @Choice_2 nvarchar(20),@Choice_3 nvarchar(20),@Choice_4 nvarchar(20)
 as
